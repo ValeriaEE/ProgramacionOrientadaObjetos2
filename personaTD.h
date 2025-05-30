@@ -2,11 +2,12 @@
 #define PERSONATD_H_
 
 #include <string>
+#include <iostream>
 
 using namespace std;
 
 class PersonaTD {
-private:
+protected:
     string nombre;
     int edad;
     
@@ -22,7 +23,19 @@ public:
     int getEdad() const { return edad; }
     void setEdad(int edadPersona) { edad = edadPersona; }
     
-    
+    virtual void mostrarInfo() const {
+    cout << "Nombre: " << nombre << ", Edad: " << edad << endl;}
+
+
+    virtual string getRol() const {
+        return "persona";
+    }
+
+    virtual bool puedeIrARegional() const {
+        return false;
+    }
+
+    virtual ~PersonaTD() {}
 };
 
 #endif

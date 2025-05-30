@@ -23,6 +23,17 @@ public:
 	string getDepartamento() const { return departamento; }
     void setDepartamento(string depProfesor) { departamento = depProfesor;}
     
+	 void mostrarInfo() const override {
+        cout << "Profesor: " << getNombre() << endl;
+    }
+
+    string getRol() const override {
+        return "profesor";
+    }
+
+    bool puedeIrARegional() const override {
+        return true; // Siempre puede ir
+    }
 };
 
 #endif

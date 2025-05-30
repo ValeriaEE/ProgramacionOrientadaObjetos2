@@ -19,7 +19,17 @@ public:
     int getHorasServicio() { return horasServicio; }
     void setHorasServicio(int horas) { horasServicio = horas; }
     
-	
+	void mostrarInfo() const override {
+        cout << "Mentor: " << getNombre()<< ", Horas Servicio: " << horasServicio << endl;
+    }
+
+    string getRol() const override {
+        return "mentor";
+    }
+
+    bool puedeIrARegional() const override {
+        return horasServicio >= 20;
+    }
 };
 
 #endif
