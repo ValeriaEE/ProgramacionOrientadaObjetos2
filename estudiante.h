@@ -2,13 +2,13 @@
 #define ESTUDIANTE_H_
 
 
-#include "personaTD.h"
+#include "personat.h"
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-class Estudiante : public PersonaTD {
+class Estudiante : public Personat {
 private:
     int puntosImpact;
     string area;
@@ -16,10 +16,11 @@ private:
 
 public:
     // Constructores
-    Estudiante() : PersonaTD(), puntosImpact(0), area(""), tipoColab("") {}
+	
+    Estudiante() : Personat(), puntosImpact(0), area(""), tipoColab("") {}
 
     Estudiante(string nombre, int edad, int puntosImpact, string area, string tipoColab)
-        : PersonaTD(nombre, edad), puntosImpact(puntosImpact), area(area), tipoColab(tipoColab) {}
+        : Personat(nombre, edad), puntosImpact(puntosImpact), area(area), tipoColab(tipoColab) {}
 
     // Getters y setters
     int getPuntosImpact() const { return puntosImpact; }
@@ -40,9 +41,6 @@ public:
              << endl;
     }
 
-    string getRol() const override {
-        return "estudiante";
-    }
 
     bool puedeIrARegional() const override {
         return puntosImpact >= 30;
