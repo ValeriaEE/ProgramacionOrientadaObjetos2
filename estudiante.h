@@ -1,7 +1,6 @@
 #ifndef ESTUDIANTE_H_
 #define ESTUDIANTE_H_
 
-
 #include "personat.h"
 #include <iostream>
 #include <string>
@@ -16,7 +15,6 @@ private:
 
 public:
     // Constructores
-	
     Estudiante() : Personat(), puntosImpact(0), area(""), tipoColab("") {}
 
     Estudiante(string nombre, int edad, int puntosImpact, string area, string tipoColab)
@@ -40,7 +38,6 @@ public:
              << ", Tipo de Colaborador: " << tipoColab
              << endl;
     }
-
 
     bool puedeIrARegional() const override {
         return puntosImpact >= 30;

@@ -14,7 +14,8 @@ private:
 public:
 // Constructores
     Profesor() : puesto(""), departamento("") {}
-    Profesor(string puesto, string departamento) : puesto(puesto), departamento(departamento) {}
+    Profesor(string nombre, int edad, string puesto, string departamento)
+        : Personat(nombre, edad), puesto(puesto), departamento(departamento) {}
     
     // Getters y setters 
     string getPuesto() const { return puesto; }

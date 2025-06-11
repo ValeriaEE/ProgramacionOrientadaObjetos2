@@ -13,6 +13,10 @@ private:
 	int horas; 
   
 public:
+	Actividad() : nombre(""), numPuntos(0), horas(0), lugar("") {}
+    Actividad(string nombre, int numPuntos, int horas, string lugar)
+        : nombre(nombre), numPuntos(numPuntos), horas(horas), lugar(lugar) {}
+		
     // Getters y setters
     string getNombre() const { return nombre; }
     void setNombre(string nombreAct) { nombre = nombreAct; }
