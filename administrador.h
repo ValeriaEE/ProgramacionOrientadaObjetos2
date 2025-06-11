@@ -22,6 +22,11 @@ private:
     int numProfesores = 0;
 
 public:
+    void registrarActividadParaEstudiante(Estudiante &e, const Actividad &a);
+    void registrarActividadParaMentor(Mentor &m, const Actividad &a);
+    void registrarActividadEstudiante(int indice, const Actividad &a);
+    void registrarActividadMentor(int indice, const Actividad &a);
+
     void agregarEstudiante(const Estudiante &e);
     void agregarMentor(const Mentor &m);
     void agregarProfesor(const Profesor &p);
@@ -31,9 +36,6 @@ public:
     void mostrarProfesores();
 
     void generarListaAsistentes();
-
-    void registrarActividadParaEstudiante(Estudiante &e, const Actividad &a);
-    void registrarActividadParaMentor(Mentor &m, const Actividad &a);
 };
 
 // Implementación de métodos
@@ -108,13 +110,24 @@ void Administrador::generarListaAsistentes() {
         profesores[i].mostrarInfo();
 }
 
-// Nuevos métodos fuera de cualquier otro método
+// Métodos de registro de actividad
+
 void Administrador::registrarActividadParaEstudiante(Estudiante &e, const Actividad &a) {
     e.setPuntosImpact(e.getPuntosImpact() + a.getNumPuntos());
 }
 
 void Administrador::registrarActividadParaMentor(Mentor &m, const Actividad &a) {
     m.setHorasServicio(m.getHorasServicio() + a.getHoras());
+}
+
+void Administrador::registrarActividadEstudiante(int indice, const Actividad &a) {
+    if (indice >= 0 && indice < numEstudiantes)
+        registrarActividadParaEstudiante(estudiantes[indice], a);
+}
+
+void Administrador::registrarActividadMentor(int indice, const Actividad &a) {
+    if (indice >= 0 && indice < numMentores)
+        registrarActividadParaMentor(mentores[indice], a);
 }
 
 #endif

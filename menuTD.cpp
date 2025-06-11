@@ -72,12 +72,14 @@ int main() {
             admin.generarListaAsistentes();
 
         } else if (opcion == 6) {
-            string nombreActividad;
+            string nombreActividad, lugar;
             int puntos, horas, tipo;
 
             cout << "Nombre de la actividad: ";
             cin.ignore();
             getline(cin, nombreActividad);
+			cout << "Lugar en donde se lleva a cabo";
+			getline(cin, lugar);
             cout << "Puntos CAS: ";
             cin >> puntos;
             cout << "Horas de servicio: ";
@@ -85,7 +87,7 @@ int main() {
             cout << "¿Asignar a? (1. Estudiante, 2. Mentor): ";
             cin >> tipo;
 
-            Actividad act(nombreActividad, puntos, horas);
+            Actividad act(nombreActividad, puntos, horas, lugar);
 
             if (tipo == 1) {
                 admin.mostrarEstudiantes();
