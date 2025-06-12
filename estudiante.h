@@ -4,6 +4,8 @@
 #include "personat.h"
 #include <iostream>
 #include <string>
+#include <sstream>  //  necesario para usar stringstream
+
 
 using namespace std;
 
@@ -21,27 +23,32 @@ public:
         : Personat(nombre, edad), puntosImpact(puntosImpact), area(area), tipoColab(tipoColab) {}
 
     // Getters y setters
-    int getPuntosImpact() const { return puntosImpact; }
+    int getPuntosImpact() { return puntosImpact; }
     void setPuntosImpact(int numPI) { puntosImpact = numPI; }
 
-    string getArea() const { return area; }
+    string getArea() { return area; }
     void setArea(string areaEstudiante) { area = areaEstudiante; }
 
-    string getTipoColab() const { return tipoColab; }
+    string getTipoColab() { return tipoColab; }
     void setTipoColab(string tipo) { tipoColab = tipo; }
 
-    void mostrarInfo() const override {
-        cout << "Estudiante: " << getNombre()
-             << ", Edad: " << getEdad()
-             << ", Puntos Impact: " << puntosImpact
-             << ", Área: " << area
-             << ", Tipo de Colaborador: " << tipoColab
-             << endl;
-    }
+	string mostrarInfo();
+	bool puedeIrARegional();
+    
 
-    bool puedeIrARegional() const override {
-        return puntosImpact >= 30;
-    }
+    
 };
 
+string Estudiante::mostrarInfo(){
+		stringstream aux; 
+		aux << "Estudiante: " << getNombre() << endl;
+        aux << ", Edad: " << getEdad() << endl;
+        aux << ", Puntos Impact: " << puntosImpact << endl;
+        aux << ", Área: " << area << endl;
+        aux << ", Tipo de Colaborador: " << tipoColab << endl;
+			return aux.str();
+	}
+bool Estudiante::puedeIrARegional() {
+        return puntosImpact >= 30;
+    }
 #endif

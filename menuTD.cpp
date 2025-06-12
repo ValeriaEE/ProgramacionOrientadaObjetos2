@@ -36,7 +36,7 @@ int main() {
             cout << "Area: "; getline(cin, area);
             cout << "Tipo colaborador: "; getline(cin, tipo);
 
-            Estudiante est(nombre, edad, puntos, area, tipo);
+            Estudiante* est= new Estudiante(nombre, edad, puntos, area, tipo);
             admin.agregarEstudiante(est);
 
         } else if (opcion == 2) {
@@ -47,7 +47,7 @@ int main() {
             cout << "Edad: "; cin >> edad;
             cout << "Horas de servicio (iniciales): "; cin >> horas;
 
-            Mentor m(nombre, edad, horas);
+            Mentor* m = new Mentor(nombre, edad, horas);
             admin.agregarMentor(m);
 
         } else if (opcion == 3) {
@@ -60,7 +60,7 @@ int main() {
             cout << "Puesto: "; getline(cin, puesto);
             cout << "Departamento: "; getline(cin, depto);
 
-            Profesor p(nombre, edad, puesto, depto);
+            Profesor* p = new Profesor(nombre, edad, puesto, depto);
             admin.agregarProfesor(p);
 
         } else if (opcion == 4) {

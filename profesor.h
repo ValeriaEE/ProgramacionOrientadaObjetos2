@@ -4,6 +4,8 @@
 #include "personat.h"
 #include <iostream>
 #include <string>
+#include <sstream>  //  necesario para usar stringstream
+
 
 using namespace std; 
 class Profesor: public Personat {
@@ -18,19 +20,30 @@ public:
         : Personat(nombre, edad), puesto(puesto), departamento(departamento) {}
     
     // Getters y setters 
-    string getPuesto() const { return puesto; }
+    string getPuesto() { return puesto; }
     void setPuesto(string puestoenTD) { puesto = puestoenTD; }
     
-	string getDepartamento() const { return departamento; }
+	string getDepartamento() { return departamento; }
     void setDepartamento(string depProfesor) { departamento = depProfesor;}
     
-	 void mostrarInfo() const override {
-        cout << "Profesor: " << getNombre() << endl;
-    }
+	 string mostrarInfo();
+	bool puedeIrARegional();
+    
 
-    bool puedeIrARegional() const override {
-        return true; // Siempre puede ir
-    }
+    
 };
+
+string Profesor::mostrarInfo(){
+		stringstream aux; 
+		aux << "Profesor: " << getNombre()
+             << ", Edad: " << getEdad()
+             << ", Puesto: " << puesto
+             << ", Departamento: " << departamento
+             << endl;
+			return aux.str();
+	}
+bool Profesor::puedeIrARegional() {
+        return true; 
+    }
 
 #endif

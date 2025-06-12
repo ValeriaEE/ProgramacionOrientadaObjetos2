@@ -17,22 +17,17 @@ public:
     Personat(string nombre, int edad) : nombre(nombre), edad(edad) {}
     
     // Getters y setters 
-    string getNombre() const { return nombre; }
+    string getNombre() { return nombre; }
     void setNombre(string nombrePersona) { nombre = nombrePersona; }
     
-    int getEdad() const { return edad; }
+    int getEdad() { return edad; }
     void setEdad(int edadPersona) { edad = edadPersona; }
     
-    virtual void mostrarInfo() const {
-        cout << "Nombre: " << nombre << ", Edad: " << edad << endl;
-    }
+	virtual string mostrarInfo()=0;
 	
-	virtual bool puedeIrARegional() const {
-        return false;
-    }
+	virtual bool puedeIrARegional ()=0; 
 	
 
-    virtual ~Personat() {}
+    //virtual ~Personat() {}
 };
-
-#endif // PERSONAT_H_
+#endif

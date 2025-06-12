@@ -4,6 +4,8 @@
 #include "personat.h"
 #include <iostream>
 #include <string>
+#include <sstream>  // ✅necesario para usar stringstream
+
 
 using namespace std;
 
@@ -22,13 +24,22 @@ public:
     int getHorasServicio() { return horasServicio; }
     void setHorasServicio(int horas) { horasServicio = horas; }
 
-    void mostrarInfo() const override {
-        cout << "Mentor: " << getNombre() << ", Horas Servicio: " << horasServicio << endl;
-    }
+	string mostrarInfo();
+	bool puedeIrARegional();
+};
 
-    bool puedeIrARegional() const override {
+string Mentor::mostrarInfo(){
+		stringstream aux; 
+		aux << "Mentor: " << getNombre()
+             << ", Edad: " << getEdad()
+             << ", Horas de Servicio: " << horasServicio
+             << endl;
+			return aux.str();
+	}
+
+bool Mentor::puedeIrARegional() {
         return horasServicio >= 20;
     }
-};
+
 
 #endif

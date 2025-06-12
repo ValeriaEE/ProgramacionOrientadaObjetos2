@@ -18,16 +18,16 @@ public:
         : nombre(nombre), numPuntos(numPuntos), horas(horas), lugar(lugar) {}
 		
     // Getters y setters
-    string getNombre() const { return nombre; }
+    string getNombre() { return nombre; }
     void setNombre(string nombreAct) { nombre = nombreAct; }
     
-    int getNumPuntos() const { return numPuntos; }
+    int getNumPuntos() { return numPuntos; }
     void setNumPuntos(int npAct) { numPuntos = npAct; }
     
-    string getLugar() const { return lugar; }
+    string getLugar() { return lugar; }
     void setLugar(string lugarAct) { lugar = lugarAct; }
     
-    int getHoras() const { return horas; }
+    int getHoras() { return horas; }
     void setHoras(int horasAct) { horas = horasAct; }
 };
 

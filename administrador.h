@@ -2,34 +2,42 @@
 #define ADMINISTRADOR_H_
 
 #include <iostream>
+//Se incluye las clases que se van a utilizar 
 #include "estudiante.h"
 #include "mentor.h"
 #include "profesor.h"
 #include "personat.h"
 #include "actividad.h"
+
+
 using namespace std;
 
+//Se define el numero maximo de integrantes por categoria 
 const int MAX = 100;
 
 class Administrador {
 private:
-    Estudiante estudiantes[MAX];
-    Mentor mentores[MAX];
-    Profesor profesores[MAX];
+	
+    Estudiante* estudiantes[MAX];
+    Mentor* mentores[MAX];
+    Profesor* profesores[MAX];
 
     int numEstudiantes = 0;
     int numMentores = 0;
     int numProfesores = 0;
 
 public:
-    void registrarActividadParaEstudiante(Estudiante &e, const Actividad &a);
-    void registrarActividadParaMentor(Mentor &m, const Actividad &a);
-    void registrarActividadEstudiante(int indice, const Actividad &a);
-    void registrarActividadMentor(int indice, const Actividad &a);
 
-    void agregarEstudiante(const Estudiante &e);
-    void agregarMentor(const Mentor &m);
-    void agregarProfesor(const Profesor &p);
+    ~Administrador();  //destructor
+
+    void registrarActividadParaEstudiante(Estudiante* e, Actividad &a);
+    void registrarActividadParaMentor(Mentor* m, Actividad &a);
+    void registrarActividadEstudiante(int indice, Actividad &a);
+    void registrarActividadMentor(int indice, Actividad &a);
+
+    void agregarEstudiante( Estudiante* e);
+    void agregarMentor( Mentor* m);
+    void agregarProfesor(Profesor* p);
 
     void mostrarEstudiantes();
     void mostrarMentores();
@@ -39,18 +47,23 @@ public:
 };
 
 // Implementación de métodos
+Administrador::~Administrador() {
+    for (int i = 0; i < numEstudiantes; ++i) delete estudiantes[i];
+    for (int i = 0; i < numMentores; ++i) delete mentores[i];
+    for (int i = 0; i < numProfesores; ++i) delete profesores[i];
+}//destructores 
 
-void Administrador::agregarEstudiante(const Estudiante &e) {
+void Administrador::agregarEstudiante( Estudiante* e) {
     if (numEstudiantes < MAX)
         estudiantes[numEstudiantes++] = e;
 }
 
-void Administrador::agregarMentor(const Mentor &m) {
+void Administrador::agregarMentor(Mentor* m) {
     if (numMentores < MAX)
         mentores[numMentores++] = m;
 }
 
-void Administrador::agregarProfesor(const Profesor &p) {
+void Administrador::agregarProfesor(Profesor* p) {
     if (numProfesores < MAX)
         profesores[numProfesores++] = p;
 }
@@ -58,19 +71,19 @@ void Administrador::agregarProfesor(const Profesor &p) {
 void Administrador::mostrarEstudiantes() {
     cout << "\n--- Estudiantes ---\n";
     for (int i = 0; i < numEstudiantes; ++i)
-        estudiantes[i].mostrarInfo();
+        cout << estudiantes[i]->mostrarInfo() <<endl;
 }
 
 void Administrador::mostrarMentores() {
     cout << "\n--- Mentores ---\n";
     for (int i = 0; i < numMentores; ++i)
-        mentores[i].mostrarInfo();
+        cout << mentores[i]->mostrarInfo() <<endl;
 }
 
 void Administrador::mostrarProfesores() {
     cout << "\n--- Profesores ---\n";
     for (int i = 0; i < numProfesores; ++i)
-        profesores[i].mostrarInfo();
+        cout << profesores[i]->mostrarInfo() <<endl;
 }
 
 void Administrador::generarListaAsistentes() {
@@ -78,12 +91,12 @@ void Administrador::generarListaAsistentes() {
 
     int estudiantesValidos = 0;
     for (int i = 0; i < numEstudiantes; ++i)
-        if (estudiantes[i].puedeIrARegional())
+        if (estudiantes[i]->puedeIrARegional())
             estudiantesValidos++;
 
     int mentoresValidos = 0;
     for (int i = 0; i < numMentores; ++i)
-        if (mentores[i].puedeIrARegional())
+        if (mentores[i]->puedeIrARegional())
             mentoresValidos++;
 
     int necesariosProfes = (estudiantesValidos + 14) / 15;
@@ -97,35 +110,35 @@ void Administrador::generarListaAsistentes() {
 
     cout << "\nEstudiantes válidos:\n";
     for (int i = 0; i < numEstudiantes; ++i)
-        if (estudiantes[i].puedeIrARegional())
-            estudiantes[i].mostrarInfo();
+        if (estudiantes[i]->puedeIrARegional())
+            cout << estudiantes[i]->mostrarInfo() << endl;
 
     cout << "\nMentores válidos:\n";
     for (int i = 0; i < numMentores; ++i)
-        if (mentores[i].puedeIrARegional())
-            mentores[i].mostrarInfo();
+        if (mentores[i]->puedeIrARegional())
+            cout << mentores[i]->mostrarInfo()<< endl;
 
     cout << "\nProfesores acompañantes:\n";
     for (int i = 0; i < necesariosProfes; ++i)
-        profesores[i].mostrarInfo();
+        cout << profesores[i]-> mostrarInfo()<< endl;
 }
 
 // Métodos de registro de actividad
 
-void Administrador::registrarActividadParaEstudiante(Estudiante &e, const Actividad &a) {
-    e.setPuntosImpact(e.getPuntosImpact() + a.getNumPuntos());
+void Administrador::registrarActividadParaEstudiante(Estudiante* e,  Actividad &a) {
+    e->setPuntosImpact(e->getPuntosImpact() + a.getNumPuntos());
 }
 
-void Administrador::registrarActividadParaMentor(Mentor &m, const Actividad &a) {
-    m.setHorasServicio(m.getHorasServicio() + a.getHoras());
+void Administrador::registrarActividadParaMentor(Mentor* m,  Actividad &a) {
+    m->setHorasServicio(m->getHorasServicio() + a.getHoras());
 }
 
-void Administrador::registrarActividadEstudiante(int indice, const Actividad &a) {
+void Administrador::registrarActividadEstudiante(int indice,  Actividad &a) {
     if (indice >= 0 && indice < numEstudiantes)
         registrarActividadParaEstudiante(estudiantes[indice], a);
 }
 
-void Administrador::registrarActividadMentor(int indice, const Actividad &a) {
+void Administrador::registrarActividadMentor(int indice,  Actividad &a) {
     if (indice >= 0 && indice < numMentores)
         registrarActividadParaMentor(mentores[indice], a);
 }
