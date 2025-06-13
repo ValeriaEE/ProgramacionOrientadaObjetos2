@@ -1,17 +1,19 @@
 #ifndef PROFESOR_H_
 #define PROFESOR_H_
 
-#include "personat.h"
+#include "personat.h" // clase base de estudiante
 #include <iostream>
-#include <string>
+#include <string> 
 #include <sstream>  //  necesario para usar stringstream
 
 
-using namespace std; 
+using namespace std;
+
+//Profesor hereda de personat 
 class Profesor: public Personat {
 private:
-    string puesto;
-	string departamento;  	
+    string puesto; //Puesto en el equipo
+	string departamento; //Departamento dentro del tec
 
 public:
 // Constructores
@@ -26,6 +28,7 @@ public:
 	string getDepartamento() { return departamento; }
     void setDepartamento(string depProfesor) { departamento = depProfesor;}
     
+	//Declaracion de metodos
 	 string mostrarInfo();
 	bool puedeIrARegional();
     
@@ -33,6 +36,11 @@ public:
     
 };
 
+/* Mostrar info convierte los atributos en un string y lo imprime 
+Este metodo sobreescribe virtualmente el de la clase base 
+para mostrar la info del profesor  
+Utiliza stringstream para armar un string completo y devolverlo
+*/
 string Profesor::mostrarInfo(){
 		stringstream aux; 
 		aux << "Profesor: " << getNombre()
@@ -42,6 +50,11 @@ string Profesor::mostrarInfo(){
              << endl;
 			return aux.str();
 	}
+	
+/* Este método sobreescribe de la clase base
+ En profesor simepr devuelve true pues los profesores 
+ no necesitan ningun tipo de validacion para ir a los regionales 
+*/
 bool Profesor::puedeIrARegional() {
         return true; 
     }

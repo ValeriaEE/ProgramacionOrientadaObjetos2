@@ -4,7 +4,7 @@
 #include "personat.h"
 #include <iostream>
 #include <string>
-#include <sstream>  // ✅necesario para usar stringstream
+#include <sstream>  // necesario para usar stringstream
 
 
 using namespace std;
@@ -23,11 +23,17 @@ public:
     // Getters y setters
     int getHorasServicio() { return horasServicio; }
     void setHorasServicio(int horas) { horasServicio = horas; }
-
+	
+	// declaracion de metodos 
 	string mostrarInfo();
 	bool puedeIrARegional();
 };
 
+/* Mostrar info convierte los atributos en un string y lo imprime 
+Este metodo sobreescribe virtualmente el de la clase base 
+para mostrar la info del mentor
+Utiliza stringstream para armar un string completo y devolverlo
+*/
 string Mentor::mostrarInfo(){
 		stringstream aux; 
 		aux << "Mentor: " << getNombre()
@@ -36,7 +42,13 @@ string Mentor::mostrarInfo(){
              << endl;
 			return aux.str();
 	}
-
+	
+/* Este método encapsula la lógica de validación 
+y sobreescribe de la clase base
+ Devuelve true si el estudiante tiene al menos 20 horas de servicio,
+ lo cual se usa en el método generarListaAsistentes() del Administrador
+*/
+ 
 bool Mentor::puedeIrARegional() {
         return horasServicio >= 20;
     }

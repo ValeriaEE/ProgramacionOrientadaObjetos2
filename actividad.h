@@ -7,12 +7,13 @@ using namespace std;
 
 class Actividad {
 private:
-    string nombre;
-    int numPuntos;
-	string lugar; 
-	int horas; 
+    string nombre; //Nombre de la activida
+    int numPuntos; //Puntos Impact que da la act 
+	string lugar; //Lugar donde se llevo acabo 
+	int horas; //Horas de servicio que da la act 
   
 public:
+	//Constructores 
 	Actividad() : nombre(""), numPuntos(0), horas(0), lugar("") {}
     Actividad(string nombre, int numPuntos, int horas, string lugar)
         : nombre(nombre), numPuntos(numPuntos), horas(horas), lugar(lugar) {}
